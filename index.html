@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windforce Digital - Empowering Brands Digitally</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- MODERN AESTHETIC STYLES --- */
+        
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            /* NEW COLOR COMBINATION: Dark Green, Maroon, Golden */
+            
+            /* Primary: Dark Green */
+            --primary: #064e3b; /* Deep Emerald/Forest Green */
+            --primary-gradient: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
+            
+            /* Accent 1 (Buttons/CTA): Maroon */
+            --accent-orange: #800000; /* Maroon */
+            --accent-orange-gradient: linear-gradient(135deg, #800000 0%, #5c0000 100%);
+            
+            /* Accent 2 (Icons/Highlights): Golden */
+            --accent-green: #d4af37; /* Metallic Gold */
+            --accent-gold-gradient: linear-gradient(135deg, #d4af37 0%, #c5a028 100%);
+            
+            /* Background Tints */
+            --bg-green-tint: #f2fcf5; /* Very pale green tint for sections */
+            
+            /* Backgrounds */
+            --bg-body: #FDFDFD;
+            --bg-glass: rgba(255, 255, 255, 0.9);
+            --bg-card: #FFFFFF;
+            
+            /* Text */
+            --text-main: #1a202c; /* Very dark grey/green for readability */
+            --text-light: #4a5568;
+            --white: #ffffff;
+            
+            /* Effects */
+            --shadow-soft: 0 10px 40px -10px rgba(6, 78, 59, 0.08);
+            --shadow-hover: 0 20px 50px -12px rgba(128, 0, 0, 0.25);
+            --border-light: 1px solid rgba(6, 78, 59, 0.1); 
+            --blur: blur(12px);
+        }
+
+        html { 
+            scroll-behavior: smooth; 
+            scroll-padding-top: 100px; 
+        }
+
+        body {
+            line-height: 1.7;
+            color: var(--text-main);
+            background-color: var(--bg-body);
+            overflow-x: hidden;
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--primary); /* Headings in Dark Green */
+        }
+
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+        ul { list-style: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 25px; }
+        .hidden { display: none !important; }
+
+        /* --- Animations --- */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+            will-change: transform, opacity;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 40px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 0%; height: 100%;
+            background: rgba(255,255,255,0.2);
+            transition: width 0.3s;
+            z-index: -1;
+        }
+
+        .btn:hover::before { width: 100%; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(128, 0, 0, 0.2); }
+
+        .btn-primary {
+            background: var(--accent-orange-gradient); /* Maroon Gradient */
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(128, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* --- Floating Action Buttons (FAB) --- */
+        .floating-actions {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 9999;
+        }
+
+        .fab-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            text-decoration: none;
+        }
+
+        .fab-btn:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        .fab-whatsapp {
+            background-color: #25D366;
+        }
+
+        .fab-phone {
+            background-color: var(--accent-orange); /* Maroon */
+        }
+        
+        .fab-btn::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            right: 70px;
+            background: rgba(6, 78, 59, 0.9); /* Dark Green Tooltip */
+            color: white;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.3s;
+            transform: translateX(10px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .fab-btn:hover::after {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* --- Header --- */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            box-shadow: 0 10px 30px rgba(6, 78, 59, 0.05);
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 90px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--primary); /* Dark Green */
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        
+        .nav-links li a {
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--text-main);
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links li a:not(.btn-header)::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-orange); /* Maroon Underline */
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-links li a:not(.btn-header):hover::before, .nav-links li a.active::before { width: 100%; }
+        .nav-links li a:not(.btn-header):hover { color: var(--accent-orange); }
+
+        /* Search Icon */
+        .search-trigger {
+            cursor: pointer;
+            font-size: 18px;
+            color: var(--primary);
+            padding: 5px;
+            transition: 0.3s;
+        }
+        .search-trigger:hover { color: var(--accent-green); transform: scale(1.1); }
+
+        /* Small Header Button */
+        .btn-header {
+            background: var(--accent-orange-gradient); /* Maroon */
+            color: white !important;
+            padding: 8px 20px !important;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 13px !important;
+            box-shadow: 0 4px 10px rgba(128, 0, 0, 0.2);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-header:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 15px rgba(128, 0, 0, 0.3);
+            background: var(--primary-gradient); /* Hover to Green */
+        }
+
+        .menu-trigger {
+            display: block;
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--primary);
+            padding: 5px;
+            transition: color 0.3s;
+        }
+        .menu-trigger:hover { color: var(--accent-orange); }
+
+        .mobile-trigger {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--primary);
+            margin-left: 15px;
+        }
+
+        .hamburger { display: none; } 
+
+        /* --- Side Menu --- */
+        .side-menu-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        .side-menu-overlay.active { opacity: 1; pointer-events: all; }
+
+        .side-menu {
+            position: fixed;
+            top: 0; right: -400px;
+            width: 350px;
+            height: 100%;
+            background: #fff;
+            z-index: 2001;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.1);
+            transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            overflow-y: auto;
+            padding: 40px;
+            border-left: 5px solid var(--primary);
+        }
+        .side-menu.active { right: 0; }
+
+        .side-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .close-menu { font-size: 24px; cursor: pointer; color: var(--text-light); transition: 0.3s; }
+        .close-menu:hover { color: var(--accent-orange); transform: rotate(90deg); }
+
+        .sm-section { margin-bottom: 40px; }
+        .sm-section h4 { 
+            font-size: 14px; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            color: var(--accent-green); /* Golden Headers in Menu */
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .sm-list li { margin-bottom: 12px; }
+        .sm-list li a { 
+            font-size: 16px; 
+            color: var(--text-main); 
+            font-weight: 500; 
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .sm-list li a:hover { color: var(--primary); transform: translateX(5px); }
+
+        .sm-sublist {
+            padding-left: 15px;
+            margin-top: 5px;
+            display: none;
+            border-left: 2px solid var(--accent-green);
+            margin-left: 5px;
+        }
+        
+        .sm-sublist li { margin-bottom: 8px; }
+        
+        .sm-sublist li a {
+            font-size: 14px;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+        
+        .sm-sublist li a:hover {
+            color: var(--accent-orange);
+        }
+
+        .sm-contact p { margin-bottom: 15px; font-size: 15px; color: var(--text-main); display: flex; align-items: center; gap: 10px; }
+        .sm-contact i { color: var(--accent-orange); width: 20px; }
+
+        .sm-social { display: flex; gap: 15px; margin-top: 20px; }
+        .sm-social a { 
+            width: 40px; height: 40px; 
+            background: var(--bg-green-tint); 
+            border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary);
+            transition: 0.3s;
+        }
+        .sm-social a:hover { background: var(--primary); color: white; }
+
+        /* --- Search Overlay --- */
+        .search-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            z-index: 2005;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 150px;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .search-overlay.active { opacity: 1; pointer-events: all; }
+        
+        .search-container { width: 100%; max-width: 600px; position: relative; padding: 0 20px; }
+        
+        .search-close {
+            position: absolute;
+            top: -80px; right: 0;
+            font-size: 30px;
+            color: var(--primary);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .search-close:hover { transform: rotate(90deg); color: var(--accent-orange); }
+        
+        #search-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid var(--primary);
+            font-size: 28px;
+            color: var(--primary);
+            padding: 15px 0;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+        }
+        #search-input::placeholder { color: var(--text-light); }
+        #search-input:focus { outline: none; border-color: var(--accent-green); }
+        
+        .search-results { margin-top: 30px; max-height: 50vh; overflow-y: auto; }
+        
+        .search-item {
+            background: var(--bg-green-tint);
+            padding: 18px 25px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.2s;
+            color: var(--text-main);
+            border: 1px solid transparent;
+        }
+        .search-item:hover { background: var(--white); border-color: var(--accent-green); transform: translateX(5px); }
+        .search-item span { font-size: 11px; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px; background: rgba(6, 78, 59, 0.1); padding: 4px 8px; border-radius: 4px; color: var(--primary); }
+
+        /* --- Ticker --- */
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            background: var(--white);
+            padding: 15px 0;
+            white-space: nowrap;
+            position: relative;
+            z-index: 5;
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .ticker-track { display: inline-block; animation: marquee 40s linear infinite; }
+
+        .ticker-item {
+            display: inline-block;
+            color: var(--text-main);
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin: 0 40px;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .ticker-item i { color: var(--accent-green); margin-right: 10px; font-size: 16px; }
+
+        .ticker-wrap:hover .ticker-track { animation-play-state: paused; }
+
+        .ticker-item:hover {
+            color: var(--accent-orange);
+            text-shadow: 0 0 1px var(--accent-orange);
+            transform: scale(1.05);
+        }
+
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            padding: 140px 0 200px;
+            /* Gradient: Pale Green to White */
+            background: linear-gradient(135deg, #f0fff4 0%, #ffffff 100%);
+            overflow: hidden;
+        }
+
+        .custom-shape-divider-bottom-1685437890 {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%;
+            overflow: hidden; line-height: 0;
+            transform: rotate(180deg); z-index: 5;
+        }
+
+        .custom-shape-divider-bottom-1685437890 svg { position: relative; display: block; width: calc(100% + 1.3px); height: 100px; transform: rotateY(180deg); }
+        .custom-shape-divider-bottom-1685437890 .shape-fill { fill: var(--bg-body); }
+
+        /* Hero blobs */
+        .hero::before {
+            content: ''; position: absolute; border-radius: 50%; filter: blur(80px); z-index: 0; animation: float 8s infinite ease-in-out;
+            width: 500px; height: 500px;
+            background: rgba(144, 238, 144, 0.2); /* Light Green */
+            top: -100px; right: -100px;
+        }
+
+        .hero::after {
+            content: ''; position: absolute; border-radius: 50%; filter: blur(80px); z-index: 0; animation: float 8s infinite ease-in-out;
+            width: 400px; height: 400px;
+            background: rgba(212, 175, 55, 0.1); /* Golden */
+            bottom: -50px; left: -100px;
+            animation-delay: -4s;
+        }
+
+        .hero .container { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+
+        .hero-text h1 { font-size: 64px; line-height: 1.1; margin-bottom: 25px; color: var(--primary); }
+        .hero-text h1 span { 
+            background: var(--accent-orange-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text p { font-size: 20px; color: var(--text-light); margin-bottom: 40px; max-width: 550px; }
+
+        .hero-img img {
+            width: 100%; border-radius: 24px;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 15px; border: 1px solid var(--accent-green);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 25px 50px -12px rgba(6, 78, 59, 0.15);
+            animation: float 5s ease-in-out infinite;
+        }
+
+        /* --- Expansion Section --- */
+        .expansion { background: var(--bg-body); color: var(--text-main); padding: 100px 0; position: relative; overflow: hidden; }
+        .expansion .container { position: relative; z-index: 2; text-align: center; }
+        .expansion h2 { font-size: 42px; margin-bottom: 10px; color: var(--primary); }
+        .expansion .subtitle { color: var(--accent-orange); font-weight: 600; letter-spacing: 2px; margin-bottom: 60px; display: block; text-transform: uppercase; }
+
+        .locations { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+
+        .city-tag {
+            background: var(--white);
+            border: 1px solid var(--border-light);
+            padding: 15px 35px; border-radius: 50px;
+            font-weight: 500; color: var(--primary);
+            transition: 0.3s;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .city-tag:hover {
+            background: var(--primary); color: white;
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: transparent;
+        }
+
+        /* --- Services Section --- */
+        .services { padding: 120px 0; background-color: var(--bg-green-tint); }
+
+        .section-head { text-align: center; margin-bottom: 80px; }
+        .section-head h2 { 
+            font-size: 42px; margin-bottom: 15px; 
+            color: var(--primary);
+        }
+        .section-head p { color: var(--accent-orange); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+        .services-container { display: flex; flex-direction: column; gap: 80px; margin-bottom: 100px; }
+        .service-category { background: transparent; box-shadow: none; border: none; overflow: visible; }
+
+        .category-header { background: transparent; padding: 0 0 30px 0; border: none; display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 10px; }
+        .category-header h3 { font-size: 30px; color: var(--primary); position: relative; padding-bottom: 10px; }
+        .category-header h3::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: var(--accent-green); border-radius: 2px; }
+        .category-header i { color: var(--white); font-size: 28px; background: var(--primary); padding: 10px; border-radius: 12px; }
+
+        .service-grid-layout { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
+
+        .svc-card {
+            background: var(--white); padding: 30px 20px; border-radius: 20px; text-align: center;
+            box-shadow: var(--shadow-soft); border: 1px solid rgba(6, 78, 59, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer;
+            position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; height: 100%;
+        }
+
+        .svc-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--accent-orange); transform: scaleX(0); transition: 0.4s; transform-origin: center;
+        }
+
+        .svc-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); border-color: transparent; }
+        .svc-card:hover::before { transform: scaleX(1); }
+
+        .svc-icon-box {
+            width: 65px; height: 65px; background: var(--bg-green-tint); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+            transition: 0.4s; color: var(--primary); font-size: 26px;
+        }
+
+        .svc-card:hover .svc-icon-box { background: var(--primary); color: var(--accent-green); transform: rotateY(180deg); }
+
+        .svc-card h4 { font-size: 17px; color: var(--text-main); font-weight: 700; line-height: 1.4; margin-bottom: 10px; }
+        .svc-card p { font-size: 13px; color: var(--text-light); line-height: 1.5; }
+        
+        .svc-arrow {
+            margin-top: auto; padding-top: 15px; font-size: 14px; font-weight: 600;
+            color: var(--accent-green); opacity: 0; transform: translateY(10px); transition: 0.3s;
+        }
+        .svc-card:hover .svc-arrow { opacity: 1; transform: translateY(0); }
+
+        /* --- Industry Grid --- */
+        .industry-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+
+        .ind-card {
+            background: var(--white); padding: 35px 25px; border-radius: 20px; text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-soft); cursor: pointer; position: relative; overflow: hidden;
+        }
+
+        .ind-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+            background: var(--accent-green); transform: scaleX(0); transition: 0.4s; transform-origin: left;
+        }
+
+        .ind-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); }
+        .ind-card:hover::before { transform: scaleX(1); }
+
+        .ind-card i {
+            font-size: 40px; margin-bottom: 25px; color: var(--primary); display: inline-block; transition: 0.4s;
+        }
+
+        .ind-card:hover i { transform: scale(1.1) rotate(-5deg); color: var(--accent-orange); }
+
+        .ind-card h4 { font-size: 18px; margin-bottom: 5px; color: var(--text-main); }
+        .ind-card span { font-size: 13px; color: var(--accent-orange); font-weight: 600; opacity: 0; transition: 0.3s; transform: translateY(10px); display: block; }
+        .ind-card:hover span { opacity: 1; transform: translateY(0); }
+
+        /* --- Contact --- */
+        .contact { padding: 100px 0; background: var(--white); }
+        
+        .contact-wrap {
+            background: var(--primary-gradient);
+            border-radius: 30px; overflow: hidden; display: flex;
+            box-shadow: 0 30px 60px -15px rgba(6, 78, 59, 0.4); position: relative;
+        }
+
+        .contact-info { flex: 1; padding: 80px; color: white; position: relative; z-index: 1; }
+        .contact-info::before {
+            content: ''; position: absolute; top: -50px; right: -50px; width: 300px; height: 300px;
+            background: rgba(212, 175, 55, 0.2); border-radius: 50%; z-index: -1;
+        }
+
+        .info-row { display: flex; align-items: center; margin-bottom: 40px; }
+        .info-row i {
+            width: 50px; height: 50px; background: rgba(255,255,255,0.1); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center; margin-right: 20px;
+            font-size: 20px; color: var(--accent-green);
+        }
+
+        .contact-form { flex: 1.2; background: white; padding: 80px; }
+
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 18px 25px; margin-bottom: 20px;
+            border: 2px solid var(--bg-green-tint); border-radius: 12px; font-size: 15px;
+            transition: 0.3s; background: var(--bg-body);
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none; border-color: var(--primary); background: white;
+            box-shadow: 0 0 0 4px rgba(6, 78, 59, 0.1);
+        }
+
+        /* --- Internal Page --- */
+        .page-wrap { padding-bottom: 100px; animation: fadeUp 0.6s ease-out; }
+        
+        .page-header {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            padding: 120px 0 80px; text-align: center; color: var(--text-main);
+            margin-bottom: 80px; position: relative;
+        }
+        
+        .back-link {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: var(--white); padding: 10px 25px; border-radius: 50px; margin-bottom: 30px;
+            font-size: 14px; font-weight: 500; box-shadow: var(--shadow-soft); cursor: pointer; transition: 0.3s;
+            color: var(--primary);
+        }
+        .back-link:hover { background: var(--primary); color: white; }
+
+        .page-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 60px; }
+
+        .content h2 { font-size: 32px; margin-bottom: 20px; color: var(--primary); }
+        .content p { font-size: 17px; color: var(--text-light); margin-bottom: 30px; line-height: 1.8; }
+        
+        .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 50px; }
+
+        .feat-card {
+            background: white; padding: 30px; border-radius: 16px; border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-soft); transition: 0.3s;
+        }
+        .feat-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); border-color: var(--accent-orange); }
+        .feat-card h4 { color: var(--primary); margin-bottom: 10px; font-size: 18px; }
+
+        .sidebar-card { background: white; padding: 40px; border-radius: 20px; border: 1px solid var(--border-light); box-shadow: var(--shadow-soft); }
+
+        .sidebar-menu li a {
+            display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--bg-body);
+            font-weight: 500; color: var(--text-light); transition: 0.2s;
+        }
+        .sidebar-menu li a:hover { color: var(--accent-orange); padding-left: 5px; }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--white); color: var(--text-light); padding: 80px 0 30px; border-top: 5px solid var(--primary);
+        }
+
+        .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        .foot-col h3 { color: var(--primary); margin-bottom: 25px; font-size: 24px; }
+        .foot-col ul li { margin-bottom: 15px; }
+        .foot-col a:hover { color: var(--accent-orange); }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .service-grid-layout { grid-template-columns: repeat(2, 1fr); }
+            .hero .container { grid-template-columns: 1fr; text-align: center; }
+            .hero-img { margin-top: 60px; }
+            .industry-grid { grid-template-columns: repeat(2, 1fr); }
+            .contact-wrap { flex-direction: column; }
+            .page-grid { grid-template-columns: 1fr; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .sidebar { order: 2; }
+        }
+
+        @media (max-width: 768px) {
+            .service-grid-layout { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .hamburger { display: none; } 
+            .mobile-trigger { display: block; }
+            
+            .hero-text h1 { font-size: 42px; }
+            .industry-grid { grid-template-columns: 1fr; }
+            .foot-grid { grid-template-columns: 1fr; }
+            
+            .contact-info, .contact-form { padding: 40px 25px; }
+            .side-menu { width: 100%; right: -100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Action Buttons -->
+    <div class="floating-actions">
+        <a href="tel:+919319970832" class="fab-btn fab-phone" data-tooltip="Call Us">
+            <i class="fas fa-phone-alt"></i>
+        </a>
+        <a href="https://wa.me/919319970832" target="_blank" class="fab-btn fab-whatsapp" data-tooltip="WhatsApp Us">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Search Overlay -->
+    <div id="search-overlay" class="search-overlay">
+        <div class="search-container">
+            <div class="search-close" onclick="toggleSearch()"><i class="fas fa-times"></i></div>
+            <input type="text" id="search-input" placeholder="Type to search services..." onkeyup="performSearch()">
+            <div id="search-results" class="search-results">
+                <!-- Results injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Side Menu Overlay & Drawer -->
+    <div id="side-menu-overlay" class="side-menu-overlay" onclick="toggleSideMenu()"></div>
+    <div id="side-menu" class="side-menu">
+        <div class="side-menu-header">
+            <div class="logo" style="font-size: 20px;"><i class="fas fa-paper-plane"></i> WINDFORCE</div>
+            <div class="close-menu" onclick="toggleSideMenu()"><i class="fas fa-times"></i></div>
+        </div>
+        
+        <div class="sm-section">
+            <h4>Menu</h4>
+            <ul class="sm-list">
+                <li><a href="javascript:void(0)" onclick="goHome(); toggleSideMenu()">Home</a></li>
+                
+                <li>
+                    <a onclick="toggleSubMenu('services-submenu', this)">
+                        Services <i class="fas fa-chevron-down" style="font-size: 12px; transition: 0.3s;"></i>
+                    </a>
+                    <ul id="services-submenu" class="sm-sublist">
+                        <li><a href="javascript:void(0)" onclick="goHome(); scrollToId('core-services'); toggleSideMenu()">Core Digital Solutions</a></li>
+                        <li><a href="javascript:void(0)" onclick="goHome(); scrollToId('specialized-services'); toggleSideMenu()">Specialized Business Ready</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="javascript:void(0)" onclick="goHome(); scrollToId('expansion'); toggleSideMenu()">Locations</a></li>
+                <li><a href="javascript:void(0)" onclick="goHome(); scrollToId('contact'); toggleSideMenu()">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="sm-section">
+            <h4>Quick Links</h4>
+            <ul class="sm-list">
+                <li><a href="javascript:void(0)" onclick="openService('web-design'); toggleSideMenu()">Web Development</a></li>
+                <li><a href="javascript:void(0)" onclick="openService('digital-marketing'); toggleSideMenu()">Digital Marketing</a></li>
+                <li><a href="javascript:void(0)" onclick="openService('ecommerce'); toggleSideMenu()">E-Commerce</a></li>
+                <li><a href="javascript:void(0)" onclick="openService('app-dev'); toggleSideMenu()">App Development</a></li>
+            </ul>
+        </div>
+
+        <div class="sm-section sm-contact">
+            <h4>Contact</h4>
+            <p><i class="fas fa-phone-alt"></i> 9319970832</p>
+            <p><i class="fas fa-envelope"></i> info@windforcedigital.com</p>
+            <p><i class="fas fa-map-marker-alt"></i> Ghaziabad, UP, India</p>
+            
+            <div class="sm-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="logo">
+                <a href="#home">
+                    <img src="logo.jpg" alt="Windforce Digital">
+                    <div class="logo-text">WINDFORCE<br>DIGITAL</div>
+                </a>
+            </div>
+            <div class="navbar">
+                <ul class="nav-links">
+                    <li><a onclick="goHome()" class="active">Home</a></li>
+                    <li><a href="javascript:void(0)" onclick="goHome(); scrollToId('services')">Services</a></li>
+                    <li><a href="javascript:void(0)" onclick="goHome(); scrollToId('expansion')">Locations</a></li>
+                    <li><a href="javascript:void(0)" onclick="goHome(); scrollToId('contact')">Contact</a></li>
+                    <li>
+                        <div class="search-trigger" onclick="toggleSearch()">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </li>
+                    <!-- Call Us Button -->
+                    <li>
+                        <a class="btn-header" onclick="goHome(); scrollToId('contact')">
+                            <i class="fas fa-phone-alt" style="font-size: 11px;"></i> Call Us
+                        </a>
+                    </li>
+                    <!-- Menu Trigger Inside Flex List for Perfect Alignment -->
+                    <li>
+                        <div class="menu-trigger" onclick="toggleSideMenu()">
+                            <i class="fas fa-bars"></i>
+                        </div>
+                    </li>
+                </ul>
+                <!-- Separate Mobile Trigger (Visible only on mobile) -->
+                <div class="mobile-trigger" onclick="toggleSideMenu()">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        
+        <!-- Service Ticker (Animated Section) -->
+        <div class="ticker-wrap">
+            <div class="ticker-track">
+                <!-- Original Items -->
+                <div class="ticker-item" onclick="openService('web-design')"><i class="fas fa-code"></i> Web Design</div>
+                <div class="ticker-item" onclick="openService('app-dev')"><i class="fas fa-mobile-alt"></i> App Development</div>
+                <div class="ticker-item" onclick="openService('digital-marketing')"><i class="fas fa-bullhorn"></i> Digital Marketing</div>
+                <div class="ticker-item" onclick="openService('ecommerce')"><i class="fas fa-shopping-cart"></i> E-Commerce</div>
+                <div class="ticker-item" onclick="openService('branding')"><i class="fas fa-paint-brush"></i> Branding</div>
+                <div class="ticker-item" onclick="openService('erp')"><i class="fas fa-school"></i> School ERP</div>
+                <div class="ticker-item" onclick="openService('billing')"><i class="fas fa-file-invoice"></i> Billing Software</div>
+                <div class="ticker-item" onclick="openService('ads-seo')"><i class="fas fa-search"></i> SEO & Ads</div>
+                
+                <!-- Duplicated Items for Seamless Loop -->
+                <div class="ticker-item" onclick="openService('web-design')"><i class="fas fa-code"></i> Web Design</div>
+                <div class="ticker-item" onclick="openService('app-dev')"><i class="fas fa-mobile-alt"></i> App Development</div>
+                <div class="ticker-item" onclick="openService('digital-marketing')"><i class="fas fa-bullhorn"></i> Digital Marketing</div>
+                <div class="ticker-item" onclick="openService('ecommerce')"><i class="fas fa-shopping-cart"></i> E-Commerce</div>
+                <div class="ticker-item" onclick="openService('branding')"><i class="fas fa-paint-brush"></i> Branding</div>
+                <div class="ticker-item" onclick="openService('erp')"><i class="fas fa-school"></i> School ERP</div>
+                <div class="ticker-item" onclick="openService('billing')"><i class="fas fa-file-invoice"></i> Billing Software</div>
+                <div class="ticker-item" onclick="openService('ads-seo')"><i class="fas fa-search"></i> SEO & Ads</div>
+            </div>
+        </div>
+
+        <!-- Hero -->
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-text reveal">
+                    <h1>Empowering Brands <span>Digitally.</span></h1>
+                    <p>We craft 360° digital experiences that transform businesses. From stunning websites to powerful marketing strategies, we build your future.</p>
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+                        <div class="btn btn-primary" onclick="scrollToId('contact')">Get Started</div>
+                        <div class="btn btn-secondary" onclick="scrollToId('services')">Explore Services</div>
+                    </div>
+                </div>
+                <div class="hero-img reveal">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Team">
+                </div>
+            </div>
+            <!-- Aesthetic Wave Divider with Matched Color -->
+            <div class="custom-shape-divider-bottom-1685437890">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Locations -->
+        <section class="expansion" id="expansion">
+            <div class="container reveal">
+                <h2>Spreading Our Wings</h2>
+                <span class="subtitle">Nationwide Presence</span>
+                <div class="locations">
+                    <div class="city-tag">Delhi-NCR (HQ)</div>
+                    <div class="city-tag">Mumbai</div>
+                    <div class="city-tag">Hyderabad</div>
+                    <div class="city-tag">Kolkata</div>
+                    <div class="city-tag">Kaushani (UK)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section class="services" id="services">
+            <div class="container">
+                <div class="section-head reveal">
+                    <h2>Our Comprehensive Services</h2>
+                    <p>Websites • Software • Development • Marketing</p>
+                </div>
+
+                <div class="services-container reveal">
+                    <!-- Core Digital Services Grid -->
+                    <!-- Added ID for scrolling -->
+                    <div id="core-services" class="service-category">
+                        <div class="category-header">
+                            <i class="fas fa-laptop-code"></i>
+                            <h3>Core Digital Solutions</h3>
+                        </div>
+                        <div class="service-grid-layout">
+                            <div class="svc-card" onclick="openService('web-design')">
+                                <div class="svc-icon-box"><i class="fas fa-code"></i></div>
+                                <h4>Web Design & Dev</h4>
+                                <p>Stunning, responsive websites tailored to your brand.</p>
+                                <span class="svc-arrow">View Details <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                            <div class="svc-card" onclick="openService('ecommerce')">
+                                <div class="svc-icon-box"><i class="fas fa-shopping-cart"></i></div>
+                                <h4>E-commerce Solutions</h4>
+                                <p>Robust online stores that drive sales 24/7.</p>
+                                <span class="svc-arrow">View Details <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                            <div class="svc-card" onclick="openService('digital-marketing')">
+                                <div class="svc-icon-box"><i class="fas fa-bullhorn"></i></div>
+                                <h4>Digital Marketing / SEO</h4>
+                                <p>Data-driven strategies to boost your visibility.</p>
+                                <span class="svc-arrow">View Details <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                            <div class="svc-card" onclick="openService('branding')">
+                                <div class="svc-icon-box"><i class="fas fa-tags"></i></div>
+                                <h4>Brand Solutions</h4>
+                                <p>Memorable logos and identity that stand out.</p>
+                                <span class="svc-arrow">View Details <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                            <div class="svc-card" onclick="openService('analytics')">
+                                <div class="svc-icon-box"><i class="fas fa-chart-pie"></i></div>
+                                <h4>Analytics & Reporting</h4>
+                                <p>Deep insights to make informed business decisions.</p>
+                                <span class="svc-arrow">View Details <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                            <div class="svc-card" onclick="openService('ads-seo')">
+                                <div class="svc-icon-box"><i class="fas fa-ad"></i></div>
+                                <h4>Meta / Google Ads</h4>
+                                <p>Targeted campaigns for high ROI and leads.</p>
+                                <span class="svc-arrow">View Details <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                            <div class="svc-card" onclick="openService('invitations')">
+                                <div class="svc-icon-box"><i class="fas fa-envelope-open-text"></i></div>
+                                <h4>Digital Invitations</h4>
+                                <p>Eco-friendly animated invites for any occasion.</p>
+                                <span class="svc-arrow">View Details <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                            <div class="svc-card" onclick="openService('photoshoot')">
+                                <div class="svc-icon-box"><i class="fas fa-camera-retro"></i></div>
+                                <h4>Photography</h4>
+                                <p>Professional product and corporate shoots.</p>
+                                <span class="svc-arrow">View Details <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Specialized Business Websites Grid -->
+                    <!-- Added ID for scrolling -->
+                    <div id="specialized-services" class="service-category">
+                        <div class="category-header">
+                            <i class="fas fa-rocket"></i>
+                            <h3>Specialized Business Ready</h3>
+                        </div>
+                        <div class="service-grid-layout">
+                            <div class="svc-card" onclick="openService('erp')">
+                                <div class="svc-icon-box"><i class="fas fa-school"></i></div>
+                                <h4>School / College ERP</h4>
+                                <p>Complete campus management systems.</p>
+                                <span class="svc-arrow">View Details <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                            <div class="svc-card" onclick="openService('astrology')">
+                                <div class="svc-icon-box"><i class="fas fa-star"></i></div>
+                                <h4>Astrology Portals</h4>
+                                <p>Booking and horoscopes for spiritual experts.</p>
+                                <span class="svc-arrow">View Details <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                            <div class="svc-card" onclick="openService('counselling')">
+                                <div class="svc-icon-box"><i class="fas fa-user-md"></i></div>
+                                <h4>Counselling Sites</h4>
+                                <p>Secure platforms for therapists and coaches.</p>
+                                <span class="svc-arrow">View Details <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                            <div class="svc-card" onclick="openService('restaurant')">
+                                <div class="svc-icon-box"><i class="fas fa-utensils"></i></div>
+                                <h4>Restaurant Tech</h4>
+                                <p>QR menus and commission-free ordering.</p>
+                                <span class="svc-arrow">View Details <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                            <div class="svc-card" onclick="openService('education')">
+                                <div class="svc-icon-box"><i class="fas fa-graduation-cap"></i></div>
+                                <h4>Online Education</h4>
+                                <p>LMS platforms to sell and teach courses.</p>
+                                <span class="svc-arrow">View Details <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                            <div class="svc-card" onclick="openService('clinics')">
+                                <div class="svc-icon-box"><i class="fas fa-hospital"></i></div>
+                                <h4>Doctor Clinics</h4>
+                                <p>Patient management and appointment systems.</p>
+                                <span class="svc-arrow">View Details <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                            <div class="svc-card" onclick="openService('booking')">
+                                <div class="svc-icon-box"><i class="fas fa-plane"></i></div>
+                                <h4>Travel Booking</h4>
+                                <p>Flight and hotel engines for agencies.</p>
+                                <span class="svc-arrow">View Details <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                            <div class="svc-card" onclick="openService('billing')">
+                                <div class="svc-icon-box"><i class="fas fa-file-invoice-dollar"></i></div>
+                                <h4>Billing Software</h4>
+                                <p>Inventory and GST billing for retail.</p>
+                                <span class="svc-arrow">View Details <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Industry Grid (Optional now, maybe remove since it overlaps) -->
+                <div class="reveal">
+                    <h3 class="text-center" style="font-size: 28px; margin-bottom: 40px; color: var(--text-main);">Popular Industries</h3>
+                    <div class="industry-grid">
+                        <div class="ind-card" onclick="openService('education')">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h4>Education</h4>
+                            <span>View Details</span>
+                        </div>
+                        <div class="ind-card" onclick="openService('restaurant')">
+                            <i class="fas fa-utensils"></i>
+                            <h4>Restaurant</h4>
+                            <span>View Details</span>
+                        </div>
+                        <div class="ind-card" onclick="openService('astrology')">
+                            <i class="fas fa-star"></i>
+                            <h4>Astrology</h4>
+                            <span>View Details</span>
+                        </div>
+                        <div class="ind-card" onclick="openService('clinics')">
+                            <i class="fas fa-heartbeat"></i>
+                            <h4>Healthcare</h4>
+                            <span>View Details</span>
+                        </div>
+                        <div class="ind-card" onclick="openService('booking')">
+                            <i class="fas fa-plane"></i>
+                            <h4>Travel</h4>
+                            <span>View Details</span>
+                        </div>
+                        <div class="ind-card" onclick="openService('ecommerce')">
+                            <i class="fas fa-shopping-bag"></i>
+                            <h4>E-commerce</h4>
+                            <span>View Details</span>
+                        </div>
+                        <div class="ind-card" onclick="openService('digital-marketing')">
+                            <i class="fas fa-chart-line"></i>
+                            <h4>Marketing</h4>
+                            <span>View Details</span>
+                        </div>
+                        <div class="ind-card" onclick="openService('photoshoot')">
+                            <i class="fas fa-camera"></i>
+                            <h4>Photography</h4>
+                            <span>View Details</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section class="contact" id="contact">
+            <div class="container reveal">
+                <div class="contact-wrap">
+                    <div class="contact-info">
+                        <h2>Let's Start a Conversation</h2>
+                        <div class="info-row">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <p style="font-size: 14px; opacity: 0.7;">Headquarters</p>
+                                <strong>SE - 478 Shastri Nagar, Ghaziabad</strong>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-phone-alt"></i>
+                            <div>
+                                <p style="font-size: 14px; opacity: 0.7;">Call Us</p>
+                                <strong>9319970832</strong>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-globe"></i>
+                            <div>
+                                <p style="font-size: 14px; opacity: 0.7;">Online</p>
+                                <strong>www.windforcedigital.com</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="contact-name" placeholder="Your Name">
+                            <input type="text" id="contact-phone" placeholder="Phone Number">
+                            <textarea id="contact-message" rows="4" placeholder="How can we help?"></textarea>
+                            <button id="submit-btn" class="btn btn-primary" style="width:100%" onclick="submitForm()">Submit Inquiry</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Detail Page (Hidden) -->
+    <div id="detail-page" class="page-wrap hidden">
+        <div class="page-header">
+            <div class="container">
+                <div class="back-link" onclick="goHome()">
+                    <i class="fas fa-arrow-left"></i> Back to Services
+                </div>
+                <h1 id="p-title">Service Title</h1>
+                <p>Home / Services / <span id="p-bread">Detail</span></p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="page-grid">
+                <div class="content">
+                    <h2>Overview</h2>
+                    <p id="p-desc">Description...</p>
+                    
+                    <h3 style="margin-top: 40px; font-size: 24px; color: var(--text-main);">Key Features</h3>
+                    <div class="feature-grid" id="p-feats">
+                        <!-- JS injected -->
+                    </div>
+                </div>
+                <div class="sidebar">
+                    <div class="sidebar-card">
+                        <h3 style="margin-bottom: 20px; font-size: 20px;">Other Services</h3>
+                        <ul class="sidebar-menu">
+                            <li><a href="javascript:void(0)" onclick="openService('web-design')">Web Development</a></li>
+                            <li><a href="javascript:void(0)" onclick="openService('app-dev')">App Development</a></li>
+                            <li><a href="javascript:void(0)" onclick="openService('digital-marketing')">Marketing</a></li>
+                        </ul>
+                        <div style="margin-top: 30px; text-align: center; background: #f8fafc; padding: 20px; border-radius: 12px;">
+                            <p style="font-size: 14px; margin-bottom: 10px;">Need Help?</p>
+                            <strong style="color: var(--primary); font-size: 18px; display: block; margin-bottom: 15px;">9319970832</strong>
+                            <div class="btn btn-primary" style="font-size: 12px; padding: 10px 20px;" onclick="goHome(); scrollToId('contact')">Contact Us</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="foot-grid">
+                <div class="foot-col">
+                    <h3>Windforce</h3>
+                    <p>Empowering brands across India with cutting-edge digital solutions. We turn ideas into reality.</p>
+                </div>
+                <div class="foot-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="javascript:void(0)" onclick="goHome()">Home</a></li>
+                        <li><a href="javascript:void(0)" onclick="goHome(); scrollToId('services')">Services</a></li>
+                        <li><a href="javascript:void(0)" onclick="goHome(); scrollToId('contact')">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col">
+                    <h3>Connect</h3>
+                    <p>Follow us on social media for updates.</p>
+                    <div style="display: flex; gap: 15px; font-size: 20px; margin-top: 20px;">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <p style="text-align: center; border-top: 1px solid #e2e8f0; padding-top: 30px;">&copy; 2025 Windforce Digital. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data
+        const serviceData = {
+            'web-design': {
+                title: 'Web Design & Development',
+                desc: `In today's digital-first world, your website is the cornerstone of your brand identity. We go beyond aesthetics to create high-performance, SEO-optimized websites that drive conversions. <br><br>
+                Our team of expert designers and developers collaborates to build responsive, mobile-first experiences tailored to your unique business goals. We utilize modern frameworks like React, Angular, and Vue.js alongside robust back-end technologies to ensure your site is secure, scalable, and lightning-fast. Whether you need a corporate portfolio, a landing page, or a complex web application, we deliver solutions that act as a 24/7 growth engine for your business.`,
+                feats: [
+                    {t:'Responsive Design', d:'Fluid layouts that adapt perfectly to mobile, tablet, and desktop screens.'},
+                    {t:'UI/UX Excellence', d:'User-centric designs that guide visitors toward making a purchase or inquiry.'},
+                    {t:'SEO Architecture', d:'Clean code and structure optimized for search engine crawlers from day one.'},
+                    {t:'CMS Integration', d:'Easy-to-use content management systems (WordPress, Custom) so you are in control.'}
+                ]
+            },
+            'ecommerce': {
+                title: 'E-commerce Solutions',
+                desc: `Transform your retail business with a powerful, scalable online store. We specialize in building custom e-commerce platforms that provide seamless shopping experiences. <br><br>
+                From intuitive product catalogs to secure, friction-free checkout processes, every element is designed to maximize sales. We integrate with major payment gateways (Razorpay, Stripe, PayPal), logistics partners, and inventory management systems. Our solutions support multi-vendor marketplaces, subscription models, and dynamic pricing, giving you the tools to compete with the biggest players in the market.`,
+                feats: [
+                    {t:'Secure Payments', d:'SSL encryption and integration with trusted gateways like Razorpay & Stripe.'},
+                    {t:'Smart Inventory', d:'Real-time stock tracking, low-stock alerts, and automated reordering.'},
+                    {t:'User Dashboards', d:'Comprehensive customer accounts for order tracking and history.'},
+                    {t:'Mobile Optimized', d:'A seamless shopping experience designed specifically for mobile users.'}
+                ]
+            },
+            'digital-marketing': {
+                title: 'Digital Marketing & SEO',
+                desc: `Visibility is the currency of the digital age. Our data-driven digital marketing strategies are designed to put your brand in front of the right people at the right time. <br><br>
+                We don't just guess; we analyze. Our team conducts deep keyword research, competitor analysis, and audience profiling to create targeted campaigns. From organic SEO that builds long-term authority to high-impact PPC campaigns that generate immediate leads, we cover the entire spectrum. We also manage your social media presence, creating engaging content that fosters community and brand loyalty across platforms like Instagram, LinkedIn, and Facebook.`,
+                feats: [
+                    {t:'Advanced SEO', d:'On-page, Off-page, and Technical SEO to dominate Google rankings.'},
+                    {t:'Social Media', d:'Strategic content calendars and community management for FB/Insta/LinkedIn.'},
+                    {t:'PPC Campaigns', d:'High-ROI Google Ads and Meta Ads optimized for lower Cost Per Acquisition.'},
+                    {t:'Content Marketing', d:'Blogs, articles, and whitepapers that establish your brand as an authority.'}
+                ]
+            },
+            'erp': {
+                title: 'School / College ERP',
+                desc: `Streamline your educational institution's operations with our comprehensive ERP software. Designed for schools, colleges, and coaching centers, our system digitizes every aspect of campus management. <br><br>
+                Say goodbye to paperwork and manual errors. Our ERP connects administration, teachers, students, and parents in a single, unified ecosystem. Features include automated attendance tracking, digital report cards, timetable management, and library systems. The integrated mobile app ensures parents are always updated on their child's progress, while the finance module handles fee collection and payroll effortlessly.`,
+                feats: [
+                    {t:'Fee Management', d:'Automated invoices, online payment gateway, and due reminders.'},
+                    {t:'Student Portal', d:'Access to homework, live classes, attendance records, and exam results.'},
+                    {t:'Admission Module', d:'Paperless online inquiries, application processing, and enrollment.'},
+                    {t:'Staff Management', d:'Teacher payroll, leave management, and lesson planning tools.'}
+                ]
+            },
+            'education': {
+                title: 'Online Education Platform',
+                desc: `Launch your own branded e-learning platform and reach students globally. Whether you are an individual tutor or a large training institute, our LMS (Learning Management System) empowers you to sell and deliver courses online. <br><br>
+                Our platform supports pre-recorded video courses, live interactive classes via Zoom/Google Meet integration, and downloadable study materials. It includes robust testing engines for quizzes and exams, automated certificate generation upon course completion, and a secure payment gateway to monetize your knowledge effectively.`,
+                feats: [
+                    {t:'LMS Dashboard', d:'Complete control over students, courses, instructors, and revenue.'},
+                    {t:'Live Classroom', d:'Integrated video conferencing for real-time interaction and doubt solving.'},
+                    {t:'Smart Quizzes', d:'Automated grading for objective tests and assignment submission portals.'},
+                    {t:'Monetization', d:'Flexible pricing models: one-time purchase, subscriptions, or bundles.'}
+                ]
+            },
+            'restaurant': {
+                title: 'Restaurant & Food Tech',
+                desc: `In the age of convenience, your restaurant needs a digital edge. We provide comprehensive food-tech solutions that streamline operations and enhance customer satisfaction. <br><br>
+                Our customized websites feature alluring digital menus, table reservation systems, and—most importantly—a commission-free online ordering system. Save the 20-30% you pay to aggregators by owning your customer data and delivery channel. We also offer QR code ordering for dine-in customers to reduce wait times and staff workload.`,
+                feats: [
+                    {t:'QR Digital Menu', d:'Contactless ordering for dine-in customers directly from their smartphones.'},
+                    {t:'Direct Ordering', d:'Commission-free delivery and pickup system integrated into your website.'},
+                    {t:'Table Booking', d:'Real-time reservation management to optimize seating capacity.'},
+                    {t:'Review Mgmt', d:'Showcase your best reviews from Google and Zomato to build trust.'}
+                ]
+            },
+            'astrology': {
+                title: 'Astrology & Vastu Portals',
+                desc: 'Expand your spiritual consultation business globally with a specialized Astrology or Vastu website. We build platforms tailored for Pandits, Astrologers, and Tarot readers to manage their practice digitally. <br><br> Our solutions include integrated booking calendars for phone or video consultations, automated Kundli generation software, and secure payment gateways for international clients. You can also host daily horoscopes, sell gemstones or remedies through an integrated e-shop, and publish blogs to engage your followers.',
+                feats: [
+                    {t:'Booking Engine', d:'Calendar syncing for scheduling voice, video, or chat consultations.'},
+                    {t:'Kundli Software', d:'API integration for instant birth chart and report generation.'},
+                    {t:'Global Payments', d:'Accept fees in multiple currencies securely via PayPal/Stripe.'},
+                    {t:'Content Blog', d:'Publish daily/weekly horoscopes and Vastu tips to drive traffic.'}
+                ]
+            },
+            'clinics': {
+                title: 'Healthcare & Clinics',
+                desc: 'Modernize your medical practice with our Clinic Management System. Designed for doctors, polyclinics, and small hospitals, our software improves patient care while reducing administrative burden. <br><br> The system handles the entire patient journey: from booking an appointment online to digital check-ins, E-Prescriptions, and secure storage of medical history. Automated SMS and WhatsApp reminders reduce no-shows, while the billing module ensures accurate financial tracking. It is fully compliant with data privacy standards to ensure patient confidentiality.',
+                feats: [
+                    {t:'Smart Queue', d:'Token-based OPD management to reduce waiting room chaos.'},
+                    {t:'E-Prescriptions', d:'Write and print clear, digital prescriptions and save templates.'},
+                    {t:'EMR / EHR', d:'Secure cloud storage for patient history, lab reports, and X-rays.'},
+                    {t:'Auto Reminders', d:'WhatsApp alerts for upcoming appointments and follow-ups.'}
+                ]
+            },
+            'booking': {
+                title: 'Travel Booking Engine',
+                desc: 'Power your travel agency with a robust B2B/B2C booking engine. We connect your website to major GDS (Global Distribution Systems) and API providers for real-time inventory of flights, hotels, and buses. <br><br> Beyond simple bookings, our system allows you to create customized holiday packages with dynamic pricing. The B2B agent module allows you to build a network of sub-agents who can book through your portal with their own markup. Complete with itinerary generation and payment processing, it’s a turnkey solution for travel businesses.',
+                feats: [
+                    {t:'Live Inventory', d:'Real-time connections to hotel banks and flight APIs for instant booking.'},
+                    {t:'Package Builder', d:'Create custom tour packages with flights, hotels, and sightseeing.'},
+                    {t:'B2B Portal', d:'Agent login system with credit limits, markups, and commission tracking.'},
+                    {t:'Itinerary Gen', d:'Auto-generate professional PDF itineraries with your branding.'}
+                ]
+            },
+            'photoshoot': {
+                title: 'Professional Photography',
+                desc: 'In a visual world, high-quality imagery is essential. Our professional photography services elevate your brand aesthetic, whether you are selling products or building a corporate identity. <br><br> We specialize in E-commerce product photography (white background, creative styling), fashion model shoots, and corporate event coverage. Our post-production team ensures every image is retouched to perfection, color-corrected, and optimized for web and print use. We help you tell your brand story through compelling visuals.',
+                feats: [
+                    {t:'E-commerce', d:'Crisp, white-background product shots compliant with Amazon/Flipkart.'},
+                    {t:'Corporate', d:'Professional headshots, office ambience, and team branding photos.'},
+                    {t:'Fashion', d:'Creative model shoots and lookbooks for clothing and lifestyle brands.'},
+                    {t:'High-End Edit', d:'Advanced retouching, color grading, and background removal included.'}
+                ]
+            },
+            'branding': {
+                title: 'Brand Solutions',
+                desc: 'A brand is more than a logo; it is the feeling your business evokes. We help you build a cohesive and memorable brand identity that resonates with your target audience. <br><br> Our branding process starts with strategy—defining your voice, mission, and values. We then translate this into visual assets: logo design, color palettes, typography, and stationery. Whether you are a startup looking for an identity or an established business needing a rebrand, we ensure consistency across all touchpoints to build trust and recognition.',
+                feats: [
+                    {t:'Logo Design', d:'Unique, vector-based logos that stand out and scale perfectly.'},
+                    {t:'Brand Guidelines', d:'A comprehensive rulebook for fonts, colors, and logo usage.'},
+                    {t:'Print Collateral', d:'Design for business cards, letterheads, brochures, and packaging.'},
+                    {t:'Rebranding', d:'Modernizing legacy brands to appeal to contemporary audiences.'}
+                ]
+            },
+            'analytics': {
+                title: 'Analytics & Reporting',
+                desc: 'Stop guessing and start knowing. Our Analytics services unlock the power of data to drive your business decisions. We set up advanced tracking infrastructure to monitor every interaction on your website and app. <br><br> We implement Google Analytics 4 (GA4), Tag Manager, and heatmaps to understand user behavior. You receive detailed monthly reports that explain not just "what" happened, but "why." We track conversions, user flow, and drop-off points, providing actionable insights to optimize your marketing spend and improve user experience.',
+                feats: [
+                    {t:'Custom Dashboards', d:'Visual, easy-to-read reports focused on your specific KPIs.'},
+                    {t:'User Heatmaps', d:'See exactly where users click, scroll, and spend time on your site.'},
+                    {t:'Conversion Tracking', d:' precise tracking of leads, sales, and goal completions.'},
+                    {t:'Growth Strategy', d:'Monthly consultation calls to discuss insights and next steps.'}
+                ]
+            },
+            'ads-seo': {
+                title: 'Meta / Google Ads / Local SEO',
+                desc: 'Accelerate your growth with targeted paid advertising and hyper-local visibility. We manage high-performance PPC campaigns on Google and social ads on Meta (Facebook/Instagram). <br><br> Our approach focuses on lowering your Cost Per Acquisition (CPA) while increasing lead quality. Simultaneously, we optimize your Google My Business (GMB) profile to ensure you dominate "near me" searches, driving foot traffic and local calls. It’s a dual strategy of immediate results via Ads and long-term stability via Local SEO.',
+                feats: [
+                    {t:'Google Ads', d:'Search, Display, and Shopping campaigns optimized for high ROI.'},
+                    {t:'Social Ads', d:'Laser-targeted Facebook & Instagram campaigns with creative A/B testing.'},
+                    {t:'GMB Ranking', d:'Optimization of Google Maps listings to capture local market share.'},
+                    {t:'Retargeting', d:'Smart campaigns to bring back visitors who didn\'t convert initially.'}
+                ]
+            },
+            'invitations': {
+                title: 'Digital Invitation Cards',
+                desc: 'Celebrate in style with our bespoke Digital Invitation services. Perfect for weddings, corporate galas, birthdays, and inaugurations, our digital invites are eco-friendly and stunning. <br><br> We create animated video invitations, interactive PDFs with clickable map links, and static e-cards. Our designs are optimized for sharing via WhatsApp and email, ensuring your guests receive a premium experience right on their phones. We can match the theme of your event perfectly with custom illustrations and music.',
+                feats: [
+                    {t:'Video Invites', d:'Cinematic motion graphic invitations with background music.'},
+                    {t:'Interactive PDF', d:'Clickable RSVP buttons, venue maps, and itinerary links.'},
+                    {t:'Custom Art', d:'Caricatures and themed illustrations unique to your event.'},
+                    {t:'Instant Share', d:'Lightweight formats optimized for seamless WhatsApp sharing.'}
+                ]
+            },
+            'billing': {
+                title: 'Billing & Management Software',
+                desc: 'Simplify your retail or wholesale business with our custom Billing and Inventory Management Software. Designed for speed and accuracy, it eliminates manual errors and theft. <br><br> The system handles GST billing, barcode scanning, and multi-warehouse stock management. Get real-time insights into your daily sales, profit margins, and low-stock alerts. Whether you run a grocery store, a pharmacy, or a garment shop, our software adapts to your specific workflow and reporting needs.',
+                feats: [
+                    {t:'GST Billing', d:'One-click tax compliant invoice generation and thermal printing.'},
+                    {t:'Live Inventory', d:'Real-time stock deduction and low-stock warning alerts.'},
+                    {t:'Expense Track', d:'Manage petty cash, vendor payments, and daily operational costs.'},
+                    {t:'Multi-User', d:'Admin, Manager, and Cashier roles with specific access permissions.'}
+                ]
+            }
+        };
+
+        // --- Side Menu Logic ---
+        function toggleSideMenu() {
+            const menu = document.getElementById('side-menu');
+            const overlay = document.getElementById('side-menu-overlay');
+            menu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        // New function to toggle submenu inside sidebar
+        function toggleSubMenu(id, linkElement) {
+            const subMenu = document.getElementById(id);
+            const icon = linkElement.querySelector('i');
+            
+            if (subMenu.style.display === "block") {
+                subMenu.style.display = "none";
+                icon.style.transform = "rotate(0deg)";
+            } else {
+                subMenu.style.display = "block";
+                icon.style.transform = "rotate(180deg)";
+            }
+        }
+
+        // --- Search Logic ---
+        function toggleSearch() {
+            const overlay = document.getElementById('search-overlay');
+            const input = document.getElementById('search-input');
+            overlay.classList.toggle('active');
+            
+            if(overlay.classList.contains('active')) {
+                input.focus();
+                performSearch(); // Show all items initially
+            }
+        }
+
+        // Build Search Index
+        let searchIndex = [
+            { title: "Home Page", type: "Section", action: () => { goHome(); scrollToId('home'); } },
+            { title: "Our Services", type: "Section", action: () => { goHome(); scrollToId('services'); } },
+            { title: "Locations & Expansion", type: "Section", action: () => { goHome(); scrollToId('expansion'); } },
+            { title: "Contact Us", type: "Section", action: () => { goHome(); scrollToId('contact'); } }
+        ];
+
+        // Add services to index
+        for(let key in serviceData) {
+            searchIndex.push({
+                title: serviceData[key].title,
+                type: "Service",
+                action: () => openService(key)
+            });
+        }
+
+        function performSearch() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const resultsContainer = document.getElementById('search-results');
+            resultsContainer.innerHTML = '';
+
+            const filtered = searchIndex.filter(item => item.title.toLowerCase().includes(query));
+
+            if(filtered.length === 0) {
+                resultsContainer.innerHTML = '<div style="color:var(--text-light); opacity:0.5; text-align:center;">No results found</div>';
+                return;
+            }
+
+            filtered.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'search-item';
+                div.innerHTML = `<strong>${item.title}</strong> <span>${item.type}</span>`;
+                div.onclick = () => {
+                    toggleSearch();
+                    item.action();
+                };
+                resultsContainer.appendChild(div);
+            });
+        }
+
+        // --- Logic ---
+        function scrollToId(id) {
+            const el = document.getElementById(id);
+            if(el) {
+                const headerOffset = 90;
+                const elementPosition = el.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+            }
+        }
+
+        function openService(key) {
+            const data = serviceData[key];
+            if(!data) return;
+
+            document.getElementById('p-title').innerText = data.title;
+            document.getElementById('p-bread').innerText = data.title;
+            // Use innerHTML to allow <br> tags
+            document.getElementById('p-desc').innerHTML = data.desc;
+            
+            const grid = document.getElementById('p-feats');
+            grid.innerHTML = '';
+            data.feats.forEach(f => {
+                grid.innerHTML += `<div class="feat-card"><h4>${f.t}</h4><p>${f.d}</p></div>`;
+            });
+
+            document.getElementById('main-content').classList.add('hidden');
+            document.getElementById('detail-page').classList.remove('hidden');
+            window.scrollTo(0,0);
+        }
+
+        function goHome() {
+            document.getElementById('detail-page').classList.add('hidden');
+            document.getElementById('main-content').classList.remove('hidden');
+            window.scrollTo(0,0);
+        }
+
+        // --- Intersection Observer for Animations ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // --- Header Scroll Effect ---
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if(window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        });
+
+        // --- Simulated Form Submission (Professional UX) ---
+        function submitForm() {
+            // Get values from input fields
+            var name = document.getElementById("contact-name").value;
+            var phone = document.getElementById("contact-phone").value;
+            var message = document.getElementById("contact-message").value;
+            var btn = document.getElementById("submit-btn");
+
+            // Basic validation
+            if (name === "" || phone === "") {
+                alert("Please enter your Name and Phone Number so we can contact you.");
+                return;
+            }
+
+            // 1. Change Button State to "Sending..."
+            var originalText = btn.innerText;
+            btn.innerText = "Sending...";
+            btn.style.opacity = "0.7";
+            btn.style.cursor = "not-allowed";
+            btn.disabled = true;
+
+            // 2. Simulate Network Request (Wait 1.5 seconds)
+            setTimeout(function() {
+                // 3. Success State
+                btn.innerText = "Message Sent Successfully!";
+                btn.style.backgroundColor = "var(--primary)"; // Dark Green for success
+                btn.style.opacity = "1";
+                
+                // 4. Clear Form
+                document.getElementById("contact-name").value = "";
+                document.getElementById("contact-phone").value = "";
+                document.getElementById("contact-message").value = "";
+
+                // 5. Reset Button after delay
+                setTimeout(function() {
+                    btn.innerText = originalText;
+                    btn.style.backgroundColor = ""; // Revert to original color
+                    btn.style.cursor = "pointer";
+                    btn.disabled = false;
+                    
+                    // Optional: Show a polite alert or simple console log
+                    // In a real backend integration, this is where the data would arrive at your server
+                    alert("Thank you, " + name + "! We have received your inquiry and will contact you at " + phone + " shortly.");
+                }, 2000);
+
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
